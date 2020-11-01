@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        tools:context=".ui.menu.home.HomeFragment">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:layout_marginRight="@dimen/_16sdp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:contentPadding="@dimen/_8sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search_TEXT"
+                android:textColor="#4C4C4C"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imgSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:contentDescription="@string/image"
+                android:src="@drawable/ic_baseline_search_24"
+                android:textAlignment="textEnd" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_34sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="@dimen/_8sdp"
+            app:cardElevation="@dimen/_4sdp"
+            app:contentPaddingBottom="@dimen/_20sdp"
+            app:layout_constraintTop_toBottomOf="@id/cardSearch">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imgBalance"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:contentDescription="@string/image"
+                    android:src="@drawable/ic_balance_scale"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:text="Balance"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintEnd_toEndOf="@id/imgBalance"
+                    app:layout_constraintStart_toStartOf="@id/imgBalance"
+                    app:layout_constraintTop_toBottomOf="@id/imgBalance" />
+
+                <ImageView
+                    android:id="@+id/imgMedical"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:contentDescription="@string/image"
+                    android:src="@drawable/ic_balance_scale"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/imgBalance" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:text="Medical\nCheck-up"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintEnd_toEndOf="@id/imgMedical"
+                    app:layout_constraintStart_toStartOf="@id/imgMedical"
+                    app:layout_constraintTop_toBottomOf="@id/imgMedical" />
+
+
+                <ImageView
+                    android:id="@+id/imgFood"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_48sdp"
+                    android:contentDescription="@string/image"
+                    android:src="@drawable/ic_rice"
+                    app:layout_constraintStart_toStartOf="@id/imgBalance"
+                    app:layout_constraintTop_toBottomOf="@id/imgBalance" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:text="Makanan"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintEnd_toEndOf="@id/imgFood"
+                    app:layout_constraintStart_toStartOf="@id/imgFood"
+                    app:layout_constraintTop_toBottomOf="@id/imgFood" />
+
+                <ImageView
+                    android:id="@+id/imgDrink"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:contentDescription="@string/image"
+                    android:src="@drawable/ic_juice"
+                    app:layout_constraintEnd_toStartOf="@id/imgMeatBall"
+                    app:layout_constraintStart_toEndOf="@id/imgFood"
+                    app:layout_constraintTop_toTopOf="@id/imgFood" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:text="Makanan"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintEnd_toEndOf="@id/imgDrink"
+                    app:layout_constraintStart_toStartOf="@id/imgDrink"
+                    app:layout_constraintTop_toBottomOf="@id/imgDrink" />
+
+                <ImageView
+                    android:id="@+id/imgMeatBall"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:contentDescription="@string/image"
+                    android:src="@drawable/ic_meatballs"
+                    app:layout_constraintEnd_toEndOf="@id/imgMedical"
+                    app:layout_constraintTop_toTopOf="@id/imgFood" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:text="Kuliner"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintEnd_toEndOf="@id/imgMeatBall"
+                    app:layout_constraintStart_toStartOf="@id/imgMeatBall"
+                    app:layout_constraintTop_toBottomOf="@id/imgMeatBall" />
+
+
+                <ImageView
+                    android:id="@+id/map"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_200sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:contentDescription="@string/image"
+                    android:src="@drawable/ic_map"
+                    app:layout_constraintTop_toBottomOf="@id/imgFood" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

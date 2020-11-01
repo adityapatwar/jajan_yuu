@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        tools:context=".ui.verification.VerificationFragment">
+
+        <ImageView
+            android:id="@+id/ico"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:contentDescription="@string/image"
+            android:src="@drawable/ic_lock"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.2" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etVerLay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ico"
+            app:layout_constraintTop_toTopOf="@id/ico">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etVer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_border_text"
+                android:hint="@string/verification_hint"
+                android:inputType="number"
+                android:paddingStart="@dimen/_8sdp"
+                android:paddingEnd="@dimen/_8sdp"
+                android:textColorHint="@color/colorText"
+                android:textSize="@dimen/_14sdp" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <ImageView
+            android:id="@+id/ico_ver"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:contentDescription="@string/image"
+            android:src="@drawable/ic_verification"
+            app:layout_constraintEnd_toEndOf="@id/etVerLay"
+            app:layout_constraintStart_toStartOf="@id/ico"
+            app:layout_constraintTop_toBottomOf="@id/etVerLay" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/verification_TEXT"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="@id/ico_ver"
+            app:layout_constraintStart_toStartOf="@id/ico_ver"
+            app:layout_constraintTop_toBottomOf="@id/ico_ver" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

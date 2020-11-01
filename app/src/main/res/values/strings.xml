@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Jajan Yuu</string>
+    <string name="image">image</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="phone_hint">Enter your phone number</string>
+    <string name="verification_hint">Enter Code Verification</string>
+    <string name="verification_TEXT">Verification</string>
+    <string name="home">Home</string>
+    <string name="activity">Activity</string>
+    <string name="payment">Payment</string>
+    <string name="inbox">Inbox</string>
+    <string name="account">Account</string>
+    <string name="search_TEXT">Cari Makanan</string>
+    <string name="price_EXAMPLE">Rp.2,000</string>
+</resources>
