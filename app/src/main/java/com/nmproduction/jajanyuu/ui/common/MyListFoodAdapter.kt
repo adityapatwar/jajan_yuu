@@ -12,21 +12,22 @@ import com.bumptech.glide.request.RequestOptions
 import com.nmproduction.jajanyuu.R
 import com.nmproduction.jajanyuu.data.model.product.Product
 import com.nmproduction.jajanyuu.databinding.CardItemProductBinding
+import com.nmproduction.jajanyuu.databinding.ItemListProductBinding
 import com.nmproduction.jajanyuu.utils.MainUtilities
 
 
-class ListFoodAdapter(private val data: List<Product?>) :
-    RecyclerView.Adapter<ListFoodAdapter.ViewHolder>() {
+class MyListFoodAdapter(private val data: List<Product?>) :
+    RecyclerView.Adapter<MyListFoodAdapter.ViewHolder>() {
 
-    var listener: MainRvClickListener? = null
+    var listener: MyListFoodClickListener? = null
 
-    inner class ViewHolder(val itemBinding: CardItemProductBinding) :
+    inner class ViewHolder(val itemBinding: ItemListProductBinding) :
         RecyclerView.ViewHolder(itemBinding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
         DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.card_item_product, parent, false
+            R.layout.item_list_product, parent, false
         )
     )
 
@@ -37,27 +38,32 @@ class ListFoodAdapter(private val data: List<Product?>) :
         val options: RequestOptions = RequestOptions()
             .centerCrop()
             .placeholder(R.mipmap.ic_launcher_round)
-            .error(R.drawable.ic_golf_cart)
+            .error(R.drawable.ic_meatballs)
 
-        Glide.with(holder.itemBinding.root).load( Uri.parse(data[position]?.imageMakanan)).apply(options).into(holder.itemBinding.imgList)
+        Glide.with(holder.itemBinding.root).load(Uri.parse(data[position]?.imageMakanan))
+            .apply(options).into(holder.itemBinding.imageProduct)
 
-
-        holder.itemBinding.txtNameProduct.text = data[position]?.namaMakanan
-        holder.itemBinding.txtPrice.text = "Rp " + data[position]?.hargaMakanan?.toInt()?.let {
+        holder.itemBinding.textName.text = data[position]?.namaMakanan
+        holder.itemBinding.textPrice.text = "Rp " + data[position]?.hargaMakanan?.toInt()?.let {
             MainUtilities.localFormatNumber(
                 it
             )
         }
 
-        holder.itemBinding.textName.text = data[position]?.namaPenjualMakanan
-        holder.itemBinding.card.setOnClickListener {
+        holder.itemBinding.viewCardProduct.setOnClickListener {
             data[position]?.let { it1 -> listener?.onItemClicked(it, it1) }
+        }
+
+        holder.itemBinding.viewCardProduct.setOnLongClickListener {
+            data[position]?.let { it1 -> listener?.onLongClickListener(it, it1) }
+            return@setOnLongClickListener true
         }
     }
 
 }
 
-interface MainRvClickListener {
+interface MyListFoodClickListener {
     fun onItemClicked(view: View, makanan: Product)
+    fun onLongClickListener(view: View, makanan: Product)
 
 }

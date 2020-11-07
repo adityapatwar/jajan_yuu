@@ -13,4 +13,14 @@
     <string name="account">Account</string>
     <string name="search_TEXT">Cari Makanan</string>
     <string name="price_EXAMPLE">Rp.2,000</string>
+    <string name="name_TEXT">Nama</string>
+    <string name="email_TEXT">Email</string>
+    <string name="phone_TEXT">Nomor Telepon</string>
+    <string name="logout_TEXT">Logout</string>
+    <string name="seller_TEXT">Penjual</string>
+    <string name="product_name_TEXT">Nama Prodak</string>
+    <string name="product_name_HINT">Masukan nama prodak</string>
+    <string name="product_price_TEXT">Harga Prodak</string>
+    <string name="product_price_HINT">"Masukan harga "</string>
+    <string name="post_TEXT">Pasang</string>
 </resources>

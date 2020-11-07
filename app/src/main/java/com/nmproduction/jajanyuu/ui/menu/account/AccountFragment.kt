@@ -1,60 +1,187 @@
 package com.nmproduction.jajanyuu.ui.menu.account
 
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.nmproduction.jajanyuu.R
+import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.nmproduction.jajanyuu.data.constant.ApplicationConstant
+import com.nmproduction.jajanyuu.data.model.product.Product
+import com.nmproduction.jajanyuu.data.preferences.AlphaPreferences
+import com.nmproduction.jajanyuu.databinding.FragmentAccountBinding
+import com.nmproduction.jajanyuu.ui.add.prodact.AddProductActivity
+import com.nmproduction.jajanyuu.ui.base.BaseFragment
+import com.nmproduction.jajanyuu.ui.common.MyListFoodAdapter
+import com.nmproduction.jajanyuu.ui.common.MyListFoodClickListener
+import com.nmproduction.jajanyuu.ui.common.MyListFoodDecoration
+import com.nmproduction.jajanyuu.ui.profil.ProfileActivity
+import com.nmproduction.jajanyuu.utils.MainUtilities
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AccountFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class AccountFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class AccountFragment : BaseFragment(), MyListFoodClickListener {
+
+    private lateinit var binding: FragmentAccountBinding
+    private lateinit var productAdapter: MyListFoodAdapter
+    private lateinit var gridLayoutManager: GridLayoutManager
+    private var listMakanan: MutableList<Product?> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        val alphaPreferences = AlphaPreferences(requireContext())
+
+
+        productAdapter = MyListFoodAdapter(listMakanan)
+        productAdapter.listener = this
+        gridLayoutManager = GridLayoutManager(
+            requireContext(),
+            4
+        )
+        val rvListFood = binding.rvListFood
+        rvListFood.apply {
+            this.adapter = productAdapter
+            this.layoutManager = LinearLayoutManager(requireContext())
+            this.addItemDecoration(
+                MyListFoodDecoration(
+                    MainUtilities.intToDp(8, resources)
+                )
+            )
+
+            this.layoutManager = gridLayoutManager
         }
+
+        getData()
+
+
+
+        binding.textName.text = alphaPreferences.name
+        Glide.with(requireContext()).load(Uri.parse(alphaPreferences.image))
+            .into(binding.imgProfile)
+
+        binding.imgProfile.setOnClickListener {
+            startActivity<ProfileActivity>(requireContext())
+        }
+
+        binding.cardAddProduct.setOnClickListener {
+            startActivity<AddProductActivity>(requireContext())
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getData()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account, container, false)
+        binding = FragmentAccountBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    fun getData() {
+        val alphaPreferences = AlphaPreferences(requireContext())
+        val ref = FirebaseDatabase.getInstance().getReference(ApplicationConstant.PROFILE).child(
+            alphaPreferences.uid.toString()
+        ).child(ApplicationConstant.PRODUCT_LIST)
+
+        val data: MutableList<Product?> = mutableListOf()
+
+        val listener = object : ValueEventListener {
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                data.clear()
+
+                for (h in dataSnapshot.children) {
+                    val it = h.getValue(Product::class.java)
+                    if (it != null) {
+                        data.add(it)
+                    }
+                }
+                listMakanan.clear()
+                data.let { listMakanan.addAll(it) }
+                productAdapter.notifyDataSetChanged()
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+
+            }
+        }
+
+        ref.addValueEventListener(listener)
+
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AccountFragment.
-         */
-        // TODO: Rename and change types and number of parameters
+        const val TAG = "AccountFragment"
+
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             AccountFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+
                 }
             }
+    }
+
+
+    override fun onItemClicked(view: View, makanan: Product) {
+        val intent = Intent(activity, AddProductActivity::class.java)
+        intent.putExtra(ApplicationConstant.ID_PRODUCT, makanan.id)
+        startActivity(intent)
+    }
+
+    override fun onLongClickListener(view: View, makanan: Product) {
+        val alphaPreferences = AlphaPreferences(requireContext())
+        val dialogClickListener =
+            DialogInterface.OnClickListener { dialog, which ->
+                when (which) {
+                    DialogInterface.BUTTON_POSITIVE -> {
+                        val dbProductList =
+                            FirebaseDatabase.getInstance()
+                                .getReference(ApplicationConstant.PRODUCT_LIST).child(makanan.id)
+                        val dbMyProduct =
+                            FirebaseDatabase.getInstance().getReference(ApplicationConstant.PROFILE).child(
+                                alphaPreferences.uid.toString()
+                            )
+                                .child(ApplicationConstant.PRODUCT_LIST).child(makanan.id)
+
+                        dbProductList.removeValue()
+                        dbMyProduct.removeValue().addOnSuccessListener {
+                            getData()
+                            Toast.makeText(requireContext(), "Delete successfully", Toast.LENGTH_LONG).show()
+                        }
+
+
+                    }
+                    DialogInterface.BUTTON_NEGATIVE -> {
+                    }
+                }
+            }
+
+        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+        builder.setMessage("Hapus Prodak ? ").setPositiveButton("Ya", dialogClickListener)
+            .setNegativeButton("Tidak", dialogClickListener).show()
+
+
     }
 }

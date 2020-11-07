@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "464899121581",
+    "firebase_url": "https://jajanyuu-30bbf.firebaseio.com",
+    "project_id": "jajanyuu-30bbf",
+    "storage_bucket": "jajanyuu-30bbf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:464899121581:android:91e0e6f029dfe3e73f4124",
+        "android_client_info": {
+          "package_name": "com.nmproduction.jajanyuu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "464899121581-nme8fsdqms65p1v8jbe1vjfjot141h64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxWHTip-ZuPeX6lza38PvRCci-JLmaedQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "464899121581-nme8fsdqms65p1v8jbe1vjfjot141h64.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

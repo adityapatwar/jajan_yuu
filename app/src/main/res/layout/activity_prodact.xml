@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.order.OrderActivity">
+    tools:context=".ui.add.prodact.AddProductActivity">
+
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        app:elevation="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            app:title=" "
+            app:title="Tambah Produk"
             app:titleTextColor="@android:color/white">
 
         </androidx.appcompat.widget.Toolbar>

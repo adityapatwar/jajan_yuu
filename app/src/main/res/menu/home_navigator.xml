@@ -29,6 +29,6 @@
         android:id="@+id/account"
         android:enabled="true"
         android:title="@string/account"
-        android:icon="@drawable/ic_account"
+        android:icon="@drawable/ic_user"
         app:showAsAction="ifRoom"/>
 </menu>
